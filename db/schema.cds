@@ -29,7 +29,14 @@ entity Turnos : cuid, managed {
     idTurno      : String(20);
     especialidad : String(50);
     motivo       : String(255);
-    estado       : estado_turno default 'pendiente';
+    
+    // AQUÍ ESTÁ LA MAGIA: El enum va directo en el campo
+    estado       : String(20) enum {
+        Pendiente  = 'Pendiente';
+        Completado = 'Completado';
+        Cancelado  = 'Cancelado';
+    } default 'Pendiente';
+    
     doctor       : Association to one Doctores;
     paciente     : Association to one Pacientes;
     recetas      : Association to many Recetas on recetas.turno = $self;
@@ -43,13 +50,7 @@ entity Recetas : cuid, managed {
     turno    : Association to one Turnos;
 }
 
-// Tipos Enumerados (Enums)
-type estado_turno : String enum {
-    pendiente;
-    completado;
-    cancelado;
-}
-
+// Mantenemos solo el de receta si quieres
 type tipo_receta : String enum {
     estudio;
     medicamento;

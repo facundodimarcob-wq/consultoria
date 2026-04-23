@@ -1,25 +1,36 @@
 const cds = require('@sap/cds');
 
-module.exports = cds.service.impl(async function() {
-    const { Turnos } = this.entities;
+module.exports = cds.service.impl(async function () {
+    const { Turnos, EstadosTurno } = this.entities;
 
-    this.before(['CREATE', 'UPDATE'], 'Turnos', (req) => {
+    // Dropdown de estados
+    this.on('READ', EstadosTurno, (req) => {
+        return [{ ID: 'Pendiente' }, { ID: 'Completado' }, { ID: 'Cancelado' }];
+    });
+
+    this.before(['CREATE'], Turnos, async (req) => {
+        // --- GENERACIÓN AUTOMÁTICA DEL ID ---
+        // Genera un código aleatorio tipo TRN-1234
+        const randomID = Math.floor(1000 + Math.random() * 9000);
+        req.data.idTurno = `TRN-${randomID}`;
+
+        // --- LÓGICA DE HORARIOS (La que ya teníamos) ---
         const { fechaHora } = req.data;
-
         if (fechaHora) {
-            const fechaTurno = new Date(fechaHora);
-            const ahora = new Date();
+            const date = new Date(fechaHora);
+            let horaReal = date.getUTCHours() - 3; 
+            if (horaReal < 0) horaReal += 24;
 
-            // --- REGLA 1: No fechas pasadas ---
-            if (fechaTurno < ahora) {
-                return req.error(400, "No puedes programar un turno para una fecha u hora que ya pasó.", "fechaHora");
+            const ahora = new Date();
+            if (date < ahora.getTime() - 300000) {
+                return req.error(400, 'No puedes programar turnos en el pasado.', 'fechaHora');
             }
 
-            // --- REGLA 2: Horario laboral (08:00 a 18:00) ---
-            const hora = fechaTurno.getHours();
+            const horaApertura = 8;
+            const horaCierre = 18;
 
-            if (hora >= 18 || hora < 8) {
-                return req.error(400, "El horario debe estar dentro de la jornada laboral (08:00 a 18:00 hs).", "fechaHora");
+            if (horaReal < horaApertura || horaReal >= horaCierre) {
+                return req.error(400, `La clínica atiende de 8:00 a 18:00 hs. (Detectado: ${horaReal}:00 hs)`, 'fechaHora');
             }
         }
     });
