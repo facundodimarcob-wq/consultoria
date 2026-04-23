@@ -1,0 +1,41 @@
+{
+  "xsappname": "Consultoria",
+  "tenant-mode": "dedicated",
+  "description": "Configuracion de seguridad para Consultoria Medica",
+  "scopes": [
+    {
+      "name": "$XSAPPNAME.admin",
+      "description": "Administrador con acceso total"
+    },
+    {
+      "name": "$XSAPPNAME.user",
+      "description": "Usuario estandar"
+    }
+  ],
+  "attributes": [],
+  "role-templates": [
+    {
+      "name": "AdminRole",
+      "description": "Acceso total a la gestion de turnos y doctores",
+      "scope-references": [
+        "$XSAPPNAME.admin"
+      ]
+    },
+    {
+      "name": "UserRole",
+      "description": "Acceso de lectura y creacion de turnos",
+      "scope-references": [
+        "$XSAPPNAME.user"
+      ]
+    }
+  ],
+  "role-collections": [
+    {
+      "name": "ConsultoriaAdmin",
+      "description": "Coleccion de roles para Administradores de la Clinica",
+      "role-template-references": [
+        "$XSAPPNAME.AdminRole"
+      ]
+    }
+  ]
+}
