@@ -1,3 +1,5 @@
-ID;nombre;apellido;especialidad
-15f21051-4e7a-4286-9051-435787997782;Gregory;House;Diagnóstico
-22f21051-4e7a-4286-9051-435787997783;Meredith;Grey;Cirugía
+nombre;apellido;especialidad
+Gregory;House;Diagnóstico
+Meredith;Grey;Cirugía
+Dimarco;Facu;penales
+Furci;Eze;paseFiltrado

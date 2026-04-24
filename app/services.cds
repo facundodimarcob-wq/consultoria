@@ -1,3 +1,3 @@
 
 
-using from './gestion_turnos/annotations';
+using from './project1/annotations';

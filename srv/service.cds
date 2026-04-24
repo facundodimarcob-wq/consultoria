@@ -91,9 +91,16 @@ annotate ConsultoriaMService.Turnos with @(
     }
 );
 
-// Mapeo de IDs a nombres legibles
+// Anotaciones para la entidad Doctores
 annotate ConsultoriaMService.Doctores with {
-    ID @Common.Text: { $value: apellido, @UI.TextArrangement: #TextFirst };
+    // 1. Vinculamos el ID con el Apellido y ocultamos el código técnico
+    ID @(
+        Common.Text : apellido,
+        Common.TextArrangement : #TextOnly
+    );
+    
+    // 2. Le decimos al sistema que no nos pida el ID al crear uno nuevo
+    ID @Core.Computed; 
 }
 annotate ConsultoriaMService.Pacientes with {
     ID @Common.Text: { $value: apellido, @UI.TextArrangement: #TextFirst };
