@@ -11,7 +11,7 @@ sap.ui.define([
             Given.iStartMyApp();
 
             Then.onTheTurnosList.iSeeThisPage();
-            Then.onTheTurnosList.onTable().iCheckColumns(5, {"idTurno":{"header":"ID Turno"},"fechaHora":{"header":"Fecha y Hora"},"motivo":{"header":"Motivo"},"estado":{"header":"Estado"},"doctor/apellido":{"header":"Doctor"}});
+            Then.onTheTurnosList.onTable().iCheckColumns(6, {"idTurno":{"header":"ID Turno"},"fechaHora":{"header":"Fecha y Hora"},"motivo":{"header":"Motivo"},"estado":{"header":"Estado"},"doctor/apellido":{"header":"Doctor"},"paciente/apellido":{"header":"Paciente"}});
 
         });
 

@@ -9,7 +9,7 @@ service ConsultoriaMService {
 
     @odata.draft.enabled
     entity Turnos as projection on my.Turnos;
-
+ 
     entity Receta as projection on my.Recetas;
 
     // Entidad virtual para los estados (esto soluciona el problema del desplegable)
@@ -91,16 +91,9 @@ annotate ConsultoriaMService.Turnos with @(
     }
 );
 
-// Anotaciones para la entidad Doctores
+// Mapeo de IDs a nombres legibles
 annotate ConsultoriaMService.Doctores with {
-    // 1. Vinculamos el ID con el Apellido y ocultamos el código técnico
-    ID @(
-        Common.Text : apellido,
-        Common.TextArrangement : #TextOnly
-    );
-    
-    // 2. Le decimos al sistema que no nos pida el ID al crear uno nuevo
-    ID @Core.Computed; 
+    ID @Common.Text: { $value: apellido, @UI.TextArrangement: #TextFirst };
 }
 annotate ConsultoriaMService.Pacientes with {
     ID @Common.Text: { $value: apellido, @UI.TextArrangement: #TextFirst };

@@ -13,7 +13,7 @@
     "sourceTemplate": {
       "id": "@sap/generator-fiori:lrop",
       "version": "1.22.0",
-      "toolsId": "e6664361-267b-40da-93c6-40707033f0bd"
+      "toolsId": "11fa674c-27c8-4e70-994d-890efe1d791b"
     },
     "dataSources": {
       "mainService": {
@@ -92,11 +92,6 @@
           "pattern": "Turnos({key}):?query:",
           "name": "TurnosObjectPage",
           "target": "TurnosObjectPage"
-        },
-        {
-          "name": "DoctoresObjectPage",
-          "pattern": "Doctores({DoctoresKey}):?query:",
-          "target": "DoctoresObjectPage"
         }
       ],
       "targets": {
@@ -113,11 +108,6 @@
                   "detail": {
                     "route": "TurnosObjectPage"
                   }
-                },
-                "Doctores": {
-                  "detail": {
-                    "route": "DoctoresObjectPage"
-                  }
                 }
               },
               "controlConfiguration": {
@@ -126,19 +116,6 @@
                     "type": "ResponsiveTable"
                   }
                 }
-              },
-              "views": {
-                "paths": [
-                  {
-                    "key": "tableView",
-                    "annotationPath": "com.sap.vocabularies.UI.v1.SelectionPresentationVariant#tableView"
-                  },
-                  {
-                    "key": "tableView1",
-                    "annotationPath": "com.sap.vocabularies.UI.v1.SelectionPresentationVariant#tableView",
-                    "entitySet": "Doctores"
-                  }
-                ]
               }
             }
           }
@@ -151,17 +128,6 @@
             "settings": {
               "editableHeaderContent": false,
               "contextPath": "/Turnos"
-            }
-          }
-        },
-        "DoctoresObjectPage": {
-          "type": "Component",
-          "id": "DoctoresObjectPage",
-          "name": "sap.fe.templates.ObjectPage",
-          "options": {
-            "settings": {
-              "navigation": {},
-              "contextPath": "/Doctores"
             }
           }
         }

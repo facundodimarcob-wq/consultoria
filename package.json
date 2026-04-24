@@ -30,7 +30,7 @@
       "[production]": {
         "db": "hana",
         "auth": "xsuaa"
-      },cds fill --to csv
+      },
       "auth": {
         "[development]": {
           "kind": "dummy"
@@ -47,6 +47,7 @@
     "app/*"
   ],
   "sapux": [
+    "app/project1",
     "app/project1",
     "app/project1"
   ]
